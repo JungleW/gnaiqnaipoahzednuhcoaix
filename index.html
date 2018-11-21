@@ -194,7 +194,11 @@ http-equiv="X-UA-Compatible">
 //					a.setAttribute('text-align','center');
 					
 					var image=new Image();
-					image.src='photo/'+photo.src;
+					  var thumb = photo.thumb;
+					  if(!thumb) {
+					    thumb = photo.src.split(".")[0] + '_thumb.' + photo.src.split(".")[1];
+					  }
+					  image.src='photo/' + thumb;
 					a.appendChild(image)
 					
 					element.appendChild( a );
@@ -426,13 +430,19 @@ http-equiv="X-UA-Compatible">
 					"src": "1.jpg",
 					"title": "demo",
 					"time": "2014-02-09 14:49:50"
+					},
+					{
+					"src": "2.jpg",
+					"title": "demo2",
+					"time": "2014-02-09 14:49:50"
 					}
 				];
 				var row =1;
 				var col = 1;
+				var len = photos.lenght;
 				for(var i = 0; i < 120;i++)
 				{
-					var photo = photos[0];
+					var photo = photos[i%len];
 					photo.col = col++;
 					photo.row = row;
 					table[i] = photo;
